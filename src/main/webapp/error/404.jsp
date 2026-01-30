@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
-    <jsp:include page="/jspf/header.jsp" />
 
     <div class="error-container">
         <div class="error-content">
@@ -21,6 +20,5 @@
         </div>
     </div>
 
-    <jsp:include page="/jspf/footer.jsp" />
 </body>
 </html>
