@@ -1,36 +1,30 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <header>
     <div class="header-container">
         <div class="logo-section">
-            <a href="${pageContext.request.contextPath}/" class="logo-link">
-                <div class="logo">
-                    <i class="fas fa-gamepad logo-icon"></i>
-                    <span class="logo-text">GameHub</span>
-                </div>
-            </a>
+             <a href="${pageContext.request.contextPath}/" class="logo-link">
+                 <div class="logo">
+                     <img src="${pageContext.request.contextPath}/images/gamehub.png"
+                          alt="GameHub" class="logo-icon" style="height: 40px;">
+                     <span class="logo-text">GameHub</span>
+                 </div>
+             </a>
             <div class="tagline">Управление игровым каталогом</div>
         </div>
 
         <div class="nav-section">
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="${pageContext.request.contextPath}/" class="nav-link ${pageContext.request.requestURI eq pageContext.request.contextPath.concat('/') ? 'active' : ''}">
-                        <i class="fas fa-home"></i> Главная
-                    </a></li>
-                    <li><a href="${pageContext.request.contextPath}/games" class="nav-link">
-                        <i class="fas fa-gamepad"></i> Игры
-                    </a></li>
-                    <li><a href="${pageContext.request.contextPath}/developers" class="nav-link">
-                        <i class="fas fa-users"></i> Разработчики
-                    </a></li>
-                    <li><a href="#" class="nav-link">
-                        <i class="fas fa-chart-bar"></i> Статистика
-                    </a></li>
-                    <li><a href="#" class="nav-link">
-                        <i class="fas fa-cog"></i> Настройки
-                    </a></li>
-                </ul>
-            </nav>
+           <nav class="main-nav">
+               <ul>
+                   <li><a href="${pageContext.request.contextPath}/" class="nav-link">
+                       <i class="fas fa-home"></i> Главная
+                   </a></li>
+                   <li><a href="${pageContext.request.contextPath}/games" class="nav-link">
+                       <i class="fas fa-gamepad"></i> Игры
+                   </a></li>
+                   <li><a href="${pageContext.request.contextPath}/developers" class="nav-link">
+                       <i class="fas fa-users"></i> Разработчики
+                   </a></li>
+               </ul>
+           </nav>
         </div>
 
         <div class="user-section">

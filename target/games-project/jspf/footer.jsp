@@ -31,14 +31,13 @@
         <div class="footer-section">
             <h3><i class="fas fa-graduation-cap"></i> Учебная информация</h3>
             <p><strong>Дисциплина:</strong> Java EE разработка</p>
-            <p><strong>Лабораторная:</strong> 2.9 - Создание главной страницы</p>
             <p><strong>Ветка Git:</strong> dev1</p>
         </div>
     </div>
 
     <div class="footer-bottom">
         <div class="copyright">
-            <i class="far fa-copyright"></i> 2024 Games Management System. Все права защищены.
+            <i class="far fa-copyright"></i> 2026 Games Management System. Все права защищены.
         </div>
         <div class="version">
             Версия 1.0.0 |
@@ -51,7 +50,7 @@
         window.addEventListener('load', function() {
             const loadTime = performance.now();
             document.getElementById('page-load-time').textContent =
-                `Загружено за ${Math.round(loadTime)}мс`;
+                'Загружено за ' + Math.round(loadTime) + 'мс';
         });
     </script>
 </footer>

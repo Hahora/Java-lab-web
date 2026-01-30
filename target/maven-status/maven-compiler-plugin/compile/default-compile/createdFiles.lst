@@ -1,2 +1,5 @@
+domain\Developer.class
 controller\DeveloperServlet.class
+domain\Game.class
 controller\GameServlet.class
+controller\TestDomainServlet.class
