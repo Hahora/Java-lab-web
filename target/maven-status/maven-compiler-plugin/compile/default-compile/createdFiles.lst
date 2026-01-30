@@ -1,5 +1,8 @@
+dao\ConnectionBuilder.class
 domain\Developer.class
 controller\DeveloperServlet.class
-domain\Game.class
 controller\GameServlet.class
 controller\TestDomainServlet.class
+dao\GameHubConnBuilder.class
+domain\Game.class
+dao\ConnectionProperty.class

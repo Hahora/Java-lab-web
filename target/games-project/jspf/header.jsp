@@ -1,10 +1,8 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <header>
     <div class="header-container">
         <div class="logo-section">
              <a href="${pageContext.request.contextPath}/" class="logo-link">
                  <div class="logo">
-                     <!-- Вместо иконки можно использовать изображение -->
                      <img src="${pageContext.request.contextPath}/images/gamehub.png"
                           alt="GameHub" class="logo-icon" style="height: 40px;">
                      <span class="logo-text">GameHub</span>

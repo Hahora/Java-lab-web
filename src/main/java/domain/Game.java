@@ -1,57 +1,21 @@
 package domain;
 
-/**
- * Класс данных о компьютерных играх
- */
 public class Game {
-
-    // Идентификатор игры
     private Long id;
-
-    // Название игры
     private String title;
-
-    // Год выпуска
     private Integer releaseYear;
-
-    // Жанр игры
     private String genre;
-
-    // Системные требования
-    private String systemRequirements;
-
-    // Внешний ключ - ссылка на разработчика
-    private Long developerId;
-
-    // Навигационное свойство - ссылка на объект Developer
     private Developer developer;
+    private String systemRequirements;
+    private Double price;
+    private Boolean multiplayer;
+    private Integer metacriticScore;
+    private String description;
 
-    // Конструктор по умолчанию
-    public Game() {
-    }
+    // Конструкторы
+    public Game() {}
 
-    // Конструктор с основными полями
-    public Game(String title, Integer releaseYear, String genre,
-                String systemRequirements, Developer developer) {
-        this.title = title;
-        this.releaseYear = releaseYear;
-        this.genre = genre;
-        this.systemRequirements = systemRequirements;
-        this.developer = developer;
-    }
-
-    // Конструктор с developerId
-    public Game(String title, Integer releaseYear, String genre,
-                String systemRequirements, Long developerId, Developer developer) {
-        this.title = title;
-        this.releaseYear = releaseYear;
-        this.genre = genre;
-        this.systemRequirements = systemRequirements;
-        this.developerId = developerId;
-        this.developer = developer;
-    }
-
-    // Полный конструктор
+    // Конструктор для совместимости со старым кодом
     public Game(Long id, String title, Integer releaseYear, String genre,
                 String systemRequirements, Long developerId, Developer developer) {
         this.id = id;
@@ -59,87 +23,71 @@ public class Game {
         this.releaseYear = releaseYear;
         this.genre = genre;
         this.systemRequirements = systemRequirements;
-        this.developerId = developerId;
         this.developer = developer;
+        this.price = 0.0;
+        this.multiplayer = false;
+        this.metacriticScore = 0;
+        this.description = "";
+    }
+
+    // Полный конструктор
+    public Game(Long id, String title, Integer releaseYear, String genre,
+                Developer developer, String systemRequirements,
+                Double price, Boolean multiplayer,
+                Integer metacriticScore, String description) {
+        this.id = id;
+        this.title = title;
+        this.releaseYear = releaseYear;
+        this.genre = genre;
+        this.developer = developer;
+        this.systemRequirements = systemRequirements;
+        this.price = price;
+        this.multiplayer = multiplayer;
+        this.metacriticScore = metacriticScore;
+        this.description = description;
     }
 
     // Геттеры и сеттеры
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getTitle() {
-        return title;
-    }
+    public Integer getReleaseYear() { return releaseYear; }
+    public void setReleaseYear(Integer releaseYear) { this.releaseYear = releaseYear; }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getGenre() { return genre; }
+    public void setGenre(String genre) { this.genre = genre; }
 
-    public Integer getReleaseYear() {
-        return releaseYear;
-    }
+    public Developer getDeveloper() { return developer; }
+    public void setDeveloper(Developer developer) { this.developer = developer; }
 
-    public void setReleaseYear(Integer releaseYear) {
-        this.releaseYear = releaseYear;
-    }
+    public String getSystemRequirements() { return systemRequirements; }
+    public void setSystemRequirements(String systemRequirements) { this.systemRequirements = systemRequirements; }
 
-    public String getGenre() {
-        return genre;
-    }
+    public Double getPrice() { return price; }
+    public void setPrice(Double price) { this.price = price; }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+    public Boolean getMultiplayer() { return multiplayer; }
+    public void setMultiplayer(Boolean multiplayer) { this.multiplayer = multiplayer; }
 
-    public String getSystemRequirements() {
-        return systemRequirements;
-    }
+    public Integer getMetacriticScore() { return metacriticScore; }
+    public void setMetacriticScore(Integer metacriticScore) { this.metacriticScore = metacriticScore; }
 
-    public void setSystemRequirements(String systemRequirements) {
-        this.systemRequirements = systemRequirements;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 
+    // Методы для обратной совместимости (если нужно)
     public Long getDeveloperId() {
-        return developerId;
+        return developer != null ? developer.getId() : null;
     }
 
-    public void setDeveloperId(Long developerId) {
-        this.developerId = developerId;
-    }
-
-    public Developer getDeveloper() {
-        return developer;
-    }
-
-    public void setDeveloper(Developer developer) {
-        this.developer = developer;
-    }
-
-    // Метод для получения названия разработчика
     public String getDeveloperName() {
-        return developer != null ? developer.getName() : "Не указан";
+        return developer != null ? developer.getName() : null;
     }
 
-    // Метод для получения рейтинга разработчика
     public Double getDeveloperRating() {
-        return developer != null ? developer.getRating() : 0.0;
-    }
-
-    @Override
-    public String toString() {
-        return "Game {" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", releaseYear=" + releaseYear +
-                ", genre='" + genre + '\'' +
-                ", systemRequirements='" + systemRequirements + '\'' +
-                ", developerId=" + developerId +
-                ", developer=" + (developer != null ? developer.getName() : "null") +
-                '}';
+        return developer != null ? developer.getRating() : null;
     }
 }
