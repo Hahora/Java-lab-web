@@ -8,45 +8,80 @@
         .header { background: #16213e; padding: 15px 30px; border-bottom: 2px solid #0f3460; }
         .header h1 { margin: 0; color: #e94560; }
         .content { padding: 30px; max-width: 600px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; color: #9cdcfe; }
-        input, textarea { width: 100%; padding: 8px; background: #16213e; border: 1px solid #0f3460; color: #e0e0e0; border-radius: 4px; box-sizing: border-box; }
-        .btn { padding: 10px 20px; background: #e94560; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        .btn-back { background: #0f3460; text-decoration: none; padding: 10px 20px; border-radius: 4px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 5px; color: #9cdcfe; font-size: 0.9em; }
+        input, textarea { width: 100%; padding: 9px; background: #16213e; border: 1px solid #0f3460; color: #e0e0e0; border-radius: 4px; box-sizing: border-box; }
+        input.error, textarea.error { border-color: #e94560; }
+        .error-msg { color: #e94560; font-size: 0.82em; margin-top: 4px; }
+        .btn { padding: 10px 24px; background: #e94560; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; }
+        .btn:hover { background: #c73652; }
+        .btn-back { background: #0f3460; text-decoration: none; padding: 10px 24px; border-radius: 4px; color: white; display: inline-block; }
+        .required { color: #e94560; }
     </style>
 </head>
 <body>
     <div class="header"><h1>🎮 GameHub</h1></div>
     <div class="content">
-        <h2 th:text="${developer.id == null ? 'Добавить разработчика' : 'Редактировать разработчика'}" style="color:#e94560;"></h2>
-        <form th:action="${developer.id == null ? '/developers' : '/developers/' + developer.id + '/edit'}" method="post" th:object="${developer}">
+        <h2 th:text="${developer.id == null ? 'Добавить разработчика' : 'Редактировать разработчика'}"
+            style="color:#e94560;"></h2>
+
+        <form th:action="${developer.id == null ? '/developers' : '/developers/' + developer.id + '/edit'}"
+              method="post" th:object="${developer}">
             <input type="hidden" th:if="${developer.id != null}" th:field="*{id}"/>
+
             <div class="form-group">
-                <label>Название *</label>
-                <input type="text" th:field="*{name}" required/>
+                <label>Название <span class="required">*</span></label>
+                <input type="text" th:field="*{name}"
+                       th:classappend="${#fields.hasErrors('name')} ? 'error'" required/>
+                <div class="error-msg" th:if="${#fields.hasErrors('name')}"
+                     th:errors="*{name}"></div>
             </div>
+
             <div class="form-group">
                 <label>Страна</label>
-                <input type="text" th:field="*{country}"/>
+                <input type="text" th:field="*{country}"
+                       th:classappend="${#fields.hasErrors('country')} ? 'error'"/>
+                <div class="error-msg" th:if="${#fields.hasErrors('country')}"
+                     th:errors="*{country}"></div>
             </div>
+
             <div class="form-group">
                 <label>Год основания</label>
-                <input type="number" th:field="*{foundedYear}" min="1900" max="2030"/>
+                <input type="number" th:field="*{foundedYear}" min="1900" max="2030"
+                       th:classappend="${#fields.hasErrors('foundedYear')} ? 'error'"/>
+                <div class="error-msg" th:if="${#fields.hasErrors('foundedYear')}"
+                     th:errors="*{foundedYear}"></div>
             </div>
+
             <div class="form-group">
-                <label>Рейтинг (0-10)</label>
-                <input type="number" th:field="*{rating}" step="0.1" min="0" max="10"/>
+                <label>Рейтинг (0.0 — 10.0)</label>
+                <input type="number" th:field="*{rating}" step="0.1" min="0" max="10"
+                       th:classappend="${#fields.hasErrors('rating')} ? 'error'"/>
+                <div class="error-msg" th:if="${#fields.hasErrors('rating')}"
+                     th:errors="*{rating}"></div>
             </div>
+
             <div class="form-group">
                 <label>Сайт</label>
-                <input type="url" th:field="*{website}"/>
+                <input type="url" th:field="*{website}"
+                       th:classappend="${#fields.hasErrors('website')} ? 'error'"
+                       placeholder="https://example.com"/>
+                <div class="error-msg" th:if="${#fields.hasErrors('website')}"
+                     th:errors="*{website}"></div>
             </div>
+
             <div class="form-group">
                 <label>Описание</label>
-                <textarea th:field="*{description}" rows="3"></textarea>
+                <textarea th:field="*{description}" rows="4"
+                          th:classappend="${#fields.hasErrors('description')} ? 'error'"></textarea>
+                <div class="error-msg" th:if="${#fields.hasErrors('description')}"
+                     th:errors="*{description}"></div>
             </div>
-            <button type="submit" class="btn">Сохранить</button>
-            <a href="/developers" class="btn-back">Отмена</a>
+
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button type="submit" class="btn">Сохранить</button>
+                <a href="/developers" class="btn-back">Отмена</a>
+            </div>
         </form>
     </div>
 </body>
