@@ -44,6 +44,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Lombok — автогенерация геттеров, сеттеров, конструкторов -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Тесты -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
