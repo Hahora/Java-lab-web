@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GameHub — Разработчик</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #1a1a2e; color: #e0e0e0; }
+        .header { background: #16213e; padding: 15px 30px; border-bottom: 2px solid #0f3460; }
+        .header h1 { margin: 0; color: #e94560; }
+        .content { padding: 30px; max-width: 600px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #9cdcfe; }
+        input, textarea { width: 100%; padding: 8px; background: #16213e; border: 1px solid #0f3460; color: #e0e0e0; border-radius: 4px; box-sizing: border-box; }
+        .btn { padding: 10px 20px; background: #e94560; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-back { background: #0f3460; text-decoration: none; padding: 10px 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>🎮 GameHub</h1></div>
+    <div class="content">
+        <h2 th:text="${developer.id == null ? 'Добавить разработчика' : 'Редактировать разработчика'}" style="color:#e94560;"></h2>
+        <form th:action="${developer.id == null ? '/developers' : '/developers/' + developer.id + '/edit'}" method="post" th:object="${developer}">
+            <input type="hidden" th:if="${developer.id != null}" th:field="*{id}"/>
+            <div class="form-group">
+                <label>Название *</label>
+                <input type="text" th:field="*{name}" required/>
+            </div>
+            <div class="form-group">
+                <label>Страна</label>
+                <input type="text" th:field="*{country}"/>
+            </div>
+            <div class="form-group">
+                <label>Год основания</label>
+                <input type="number" th:field="*{foundedYear}" min="1900" max="2030"/>
+            </div>
+            <div class="form-group">
+                <label>Рейтинг (0-10)</label>
+                <input type="number" th:field="*{rating}" step="0.1" min="0" max="10"/>
+            </div>
+            <div class="form-group">
+                <label>Сайт</label>
+                <input type="url" th:field="*{website}"/>
+            </div>
+            <div class="form-group">
+                <label>Описание</label>
+                <textarea th:field="*{description}" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn">Сохранить</button>
+            <a href="/developers" class="btn-back">Отмена</a>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GameHub — Разработчики</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #1a1a2e; color: #e0e0e0; }
+        .header { background: #16213e; padding: 15px 30px; border-bottom: 2px solid #0f3460; display:flex; justify-content:space-between; align-items:center; }
+        .header h1 { margin: 0; color: #e94560; }
+        .nav a { color: #9cdcfe; text-decoration: none; margin-left: 15px; }
+        .content { padding: 30px; }
+        .btn { padding: 8px 16px; background: #e94560; color: white; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; }
+        .btn-sm { padding: 4px 10px; font-size: 0.85em; }
+        .btn-edit { background: #0f3460; }
+        .btn-del { background: #7a1a2a; }
+        table { width: 100%; border-collapse: collapse; background: #16213e; border-radius: 8px; overflow: hidden; }
+        th { background: #0f3460; padding: 12px 15px; text-align: left; color: #9cdcfe; }
+        td { padding: 10px 15px; border-bottom: 1px solid #0f3460; }
+        tr:hover td { background: #1e2e50; }
+        .rating { color: #ffd700; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎮 GameHub</h1>
+        <div class="nav">
+            <a href="/">Главная</a>
+            <a href="/games">Игры</a>
+            <a href="/developers">Разработчики</a>
+        </div>
+    </div>
+    <div class="content">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2 style="margin:0; color:#e94560;">Разработчики</h2>
+            <a href="/developers/new" class="btn">+ Добавить разработчика</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Страна</th>
+                    <th>Год основания</th>
+                    <th>Рейтинг</th>
+                    <th>Сайт</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="dev : ${developers}">
+                    <td><a th:href="@{/developers/{id}(id=${dev.id})}" th:text="${dev.name}" style="color:#9cdcfe; text-decoration:none;"></a></td>
+                    <td th:text="${dev.country}"></td>
+                    <td th:text="${dev.foundedYear}"></td>
+                    <td class="rating" th:text="${dev.rating}"></td>
+                    <td><a th:if="${dev.website}" th:href="${dev.website}" th:text="${dev.website}" target="_blank" style="color:#9cdcfe;"></a></td>
+                    <td>
+                        <a th:href="@{/developers/{id}/edit(id=${dev.id})}" class="btn btn-sm btn-edit">Изменить</a>
+                        <form th:action="@{/developers/{id}/delete(id=${dev.id})}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-del" onclick="return confirm('Удалить?')">Удалить</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

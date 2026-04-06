@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GameHub — Игра</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #1a1a2e; color: #e0e0e0; }
+        .header { background: #16213e; padding: 15px 30px; border-bottom: 2px solid #0f3460; }
+        .header h1 { margin: 0; color: #e94560; }
+        .content { padding: 30px; max-width: 600px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #9cdcfe; }
+        input, select, textarea { width: 100%; padding: 8px; background: #16213e; border: 1px solid #0f3460; color: #e0e0e0; border-radius: 4px; box-sizing: border-box; }
+        .btn { padding: 10px 20px; background: #e94560; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-back { background: #0f3460; text-decoration: none; padding: 10px 20px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>🎮 GameHub</h1></div>
+    <div class="content">
+        <h2 th:text="${game.id == null ? 'Добавить игру' : 'Редактировать игру'}" style="color:#e94560;"></h2>
+        <form th:action="${game.id == null ? '/games' : '/games/' + game.id + '/edit'}" method="post" th:object="${game}">
+            <input type="hidden" th:if="${game.id != null}" th:field="*{id}"/>
+            <div class="form-group">
+                <label>Название *</label>
+                <input type="text" th:field="*{title}" required/>
+            </div>
+            <div class="form-group">
+                <label>Год выхода</label>
+                <input type="number" th:field="*{releaseYear}" min="1970" max="2030"/>
+            </div>
+            <div class="form-group">
+                <label>Жанр</label>
+                <input type="text" th:field="*{genre}"/>
+            </div>
+            <div class="form-group">
+                <label>Разработчик</label>
+                <select th:field="*{developer.id}">
+                    <option value="">— выберите —</option>
+                    <option th:each="dev : ${developers}" th:value="${dev.id}" th:text="${dev.name}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Цена ($)</label>
+                <input type="number" th:field="*{price}" step="0.01" min="0"/>
+            </div>
+            <div class="form-group">
+                <label>Мультиплеер</label>
+                <select th:field="*{multiplayer}">
+                    <option value="false">Нет</option>
+                    <option value="true">Да</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Metacritic Score</label>
+                <input type="number" th:field="*{metacriticScore}" min="0" max="100"/>
+            </div>
+            <div class="form-group">
+                <label>Системные требования</label>
+                <textarea th:field="*{systemRequirements}" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Описание</label>
+                <textarea th:field="*{description}" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn">Сохранить</button>
+            <a href="/games" class="btn-back">Отмена</a>
+        </form>
+    </div>
+</body>
+</html>

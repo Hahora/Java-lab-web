@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${game?.title + ' — GameHub'}">GameHub</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #1a1a2e; color: #e0e0e0; }
+        .header { background: #16213e; padding: 15px 30px; border-bottom: 2px solid #0f3460; }
+        .header h1 { margin: 0; color: #e94560; }
+        .content { padding: 30px; max-width: 700px; }
+        .card { background: #16213e; border-radius: 8px; padding: 25px; }
+        .field { margin: 10px 0; }
+        .label { color: #9cdcfe; font-size: 0.85em; margin-bottom: 3px; }
+        .value { font-size: 1em; }
+        .score { color: #4ec94e; font-size: 2em; font-weight: bold; }
+        .btn { padding: 8px 16px; background: #0f3460; color: white; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="header"><h1>🎮 GameHub</h1></div>
+    <div class="content" th:if="${game}">
+        <a href="/games" class="btn" style="margin-bottom:20px; display:inline-block;">← Назад</a>
+        <div class="card">
+            <h2 th:text="${game.title}" style="color:#e94560; margin-top:0;"></h2>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+                <div class="field"><div class="label">Жанр</div><div class="value" th:text="${game.genre}"></div></div>
+                <div class="field"><div class="label">Год выхода</div><div class="value" th:text="${game.releaseYear}"></div></div>
+                <div class="field"><div class="label">Разработчик</div><div class="value" th:text="${game.developer?.name}"></div></div>
+                <div class="field"><div class="label">Цена</div><div class="value" th:text="${'$' + game.price}"></div></div>
+                <div class="field"><div class="label">Мультиплеер</div><div class="value" th:text="${game.multiplayer ? 'Да' : 'Нет'}"></div></div>
+                <div class="field"><div class="label">Metacritic Score</div><div class="score" th:text="${game.metacriticScore}"></div></div>
+            </div>
+            <div class="field" th:if="${game.description}">
+                <div class="label">Описание</div>
+                <div class="value" th:text="${game.description}"></div>
+            </div>
+            <div style="margin-top:20px;">
+                <a th:href="@{/games/{id}/edit(id=${game.id})}" class="btn">Редактировать</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
