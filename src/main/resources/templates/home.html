@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>GameHub</title>
@@ -15,11 +16,21 @@
             background: #16213e;
             padding: 20px 40px;
             border-bottom: 2px solid #0f3460;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .header h1 {
             margin: 0;
             color: #e94560;
             font-size: 2em;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9em;
+            color: #9cdcfe;
         }
         .hero {
             text-align: center;
@@ -50,11 +61,27 @@
             background: #0f3460;
         }
         .btn-secondary:hover { background: #1a4a80; }
+        .btn-logout {
+            background: transparent;
+            border: 1px solid #e94560;
+            color: #e94560;
+            padding: 6px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .btn-logout:hover { background: #e94560; color: white; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>🎮 GameHub</h1>
+        <div class="user-info" sec:authorize="isAuthenticated()">
+            <span>Привет, <strong sec:authentication="name"></strong>!</span>
+            <form th:action="@{/logout}" method="post" style="margin:0;">
+                <button type="submit" class="btn-logout">Выйти</button>
+            </form>
+        </div>
     </div>
     <div class="hero">
         <h2>Добро пожаловать в GameHub!</h2>
